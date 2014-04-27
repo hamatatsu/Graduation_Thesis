@@ -1,50 +1,45 @@
 // Tatsuya Hamada's graduation thesis.
 
 class Object {
-  char name;
+  int name;
   int type;
   String data;
-  int tchk;
-  Object (char pname, int ptype, String pdata, int ptchk) {
+  int chk;
+  Object (int pname, int ptype, String pdata, int pchk) {
     name = pname;
     type = ptype;
     data = pdata;
-    tchk = ptchk;
+    chk = pchk;
   }
-  char name() {
+  int name() {
     return name;
   }
-  String type() {
-    return objectNameString[type];
+  int type() {
+    return type;
   }
   String data() {
     return data;
   }
-  int tchk() {
-    return tchk;
+  int chk() {
+    return chk;
+  }
+  int pointX() {
+    int[] token = int(splitTokens(data));
+    return token[0];
+  }
+  int pointY() {
+    int[] token = int(splitTokens(data));
+    return token[1];
+  }
+  void chkSwit(int sw) {
+    chk = sw;
   }
   void d_add(int px, int py) {
     switch(type) {
     case 0:
       data = str(px) + " " + str(py);
+      break;
     }
-    tchk = 0;
-  }
-  void search() {
-    String[] token = splitTokens(data);
-    switch(type) {
-    case 0:
-      if (dist(float(tx), float(ty), int(token[0]), int(token[1])) <= 5) {
-        tchk = 1;
-      }
-    }
-  }
-  void display() {
-    String[] token = splitTokens(data);
-    switch(type) {
-    case 0:
-      point(int(token[0]), int(token[1]));
-    }
+    chk = 0;
   }
 }
-
