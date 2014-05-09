@@ -20,6 +20,8 @@ void setup() {
   background(255);
   stroke(0);
   strokeWeight(5);
+  Object newObject = new Object(0, 0, "-1 -1", 0);
+  objects.add(0, newObject);
 }
 
 void draw() {
@@ -30,15 +32,15 @@ void draw() {
   else {   
     tx = mouseX;
     ty = mouseY;
-    for (int i = 0; i < objects.size(); i++) {
+    for (int i = 1; i < objects.size(); i++) {
       if (objects.get(i).chk() == 1) {
         objects.get(i).d_add(tx, ty);
       }
     }
   }
   display();
-  if (objects.size()!=0) {
-    for (int i = 0; i < objects.size(); i++) {
+  if (objects.size() > 1) {
+    for (int i = 1; i < objects.size(); i++) {
       println(objects.get(i).name(), objectNameString[objects.get(i).type()], objects.get(i).data());
     }
   }
@@ -48,7 +50,7 @@ void draw() {
 //  int tx = mouseX;
 //  int ty = mouseY;
 //  int px, py;
-//  for (int i = 0; i < objects.size(); i++) {
+//  for (int i = 1; i < objects.size(); i++) {
 //    if (objects.get(i).tchk() == 1) {
 //      objects.get(i).d_add(str(tx) + "," + str(ty));
 //    }
@@ -89,14 +91,13 @@ void mousePushed() {
       case 1:
         int ix = tx;
         int iy = ty;
-        while (mousePressed == true) {
-          
+        while (mousePressed) {
         }
         datas  = str(search(tx, ty)) + " " + str(search(ix, iy));
         break;
       }
-      Object newObject = new Object(count, pkeyn, datas, 0);
-      objects.add(count, newObject);
+      Object newObject = new Object(count + 1, pkeyn, datas, 0);
+      objects.add(count + 1, newObject);
       count++;
     }
     chk = false;
@@ -107,7 +108,7 @@ void mousePushed() {
 }
 int search(int px, int py) {
   int i;
-  for (i = 0;i < objects.size(); i++) {
+  for (i = 1;i < objects.size(); i++) {
     String[] token = splitTokens(objects.get(i).data());
     switch(objects.get(i).type()) {
     case 0:
@@ -120,7 +121,7 @@ int search(int px, int py) {
   return i;
 }
 void display() {
-  for (int i = 0; i < objects.size(); i++) {
+  for (int i = 1; i < objects.size(); i++) {
     int[] token = int(splitTokens(objects.get(i).data()));
     switch(objects.get(i).type()) {
     case 0:
