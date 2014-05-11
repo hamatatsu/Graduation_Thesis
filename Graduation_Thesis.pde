@@ -26,37 +26,37 @@ void setup() {
 
 void draw() {
   background(255);
-  if (tchk) {
+  tx = mouseX;
+  ty = mouseY;
+  if (mousePressed) {
+    objects.get(0).d_add(tx, ty);
     mousePushed();
   } 
-  else {   
-    tx = mouseX;
-    ty = mouseY;
+  else {
+    if (keyPressed && (objects.get(0).data() != "-1 -1")) {
+      println(tchk);
+      Object newObject = new Object(count + 1, objects.get(0).type(), objects.get(0).data(), 0);
+      println(newObject);
+      objects.add(count + 1, newObject);
+      count++;
+    }
     for (int i = 1; i < objects.size(); i++) {
       if (objects.get(i).chk() == 1) {
-        objects.get(i).d_add(tx, ty);
+        objects.get(i).d_add(objects.get(0).pointX(), objects.get(0).pointY());
       }
     }
+
+    Object newObject = new Object(0, 0, "-1 -1", 0);
+    objects.set(0, newObject);
   }
-  display();
-  if (objects.size() > 1) {
-    for (int i = 1; i < objects.size(); i++) {
+  if (objects.size() > 0) {
+    for (int i = 0; i < objects.size(); i++) {
       println(objects.get(i).name(), objectNameString[objects.get(i).type()], objects.get(i).data());
     }
+    println();
   }
+  display();
 }
-//
-//void mouseDragged() {
-//  int tx = mouseX;
-//  int ty = mouseY;
-//  int px, py;
-//  for (int i = 1; i < objects.size(); i++) {
-//    if (objects.get(i).tchk() == 1) {
-//      objects.get(i).d_add(str(tx) + "," + str(ty));
-//    }
-//  }
-//}
-//
 
 void mousePressed() {
   tx = mouseX;
@@ -69,7 +69,6 @@ void mouseReleased() {
   tx = mouseX;
   ty = mouseY;
   tchk = false;
-
   println("off");
 }
 
@@ -77,7 +76,7 @@ void mousePushed() {
   boolean chk = false;
   if (keyPressed) {
     char pkey = key;
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 3; i++) {
       if (objectName[i] == pkey) {
         pkeyn = i;
         chk = true;
@@ -89,16 +88,11 @@ void mousePushed() {
         datas = str(tx) + " " + str(ty);
         break;
       case 1:
-        int ix = tx;
-        int iy = ty;
-        while (mousePressed) {
-        }
-        datas  = str(search(tx, ty)) + " " + str(search(ix, iy));
+        datas  = str(search(tx, ty)) + " " + str(0);
         break;
       }
-      Object newObject = new Object(count + 1, pkeyn, datas, 0);
-      objects.add(count + 1, newObject);
-      count++;
+      Object newObject = new Object(0, pkeyn, datas, 0);
+      objects.set(0, newObject);
     }
     chk = false;
   }
@@ -108,7 +102,7 @@ void mousePushed() {
 }
 int search(int px, int py) {
   int i;
-  for (i = 1;i < objects.size(); i++) {
+  for (i = 1; i < objects.size(); i++) {
     String[] token = splitTokens(objects.get(i).data());
     switch(objects.get(i).type()) {
     case 0:
@@ -121,13 +115,14 @@ int search(int px, int py) {
   return i;
 }
 void display() {
-  for (int i = 1; i < objects.size(); i++) {
+  for (int i = 0; i < objects.size(); i++) {
     int[] token = int(splitTokens(objects.get(i).data()));
     switch(objects.get(i).type()) {
     case 0:
       point(int(token[0]), int(token[1]));
       break;
     case 1:
+      token[0]--;
       int startX = objects.get(token[0]).pointX();
       int startY = objects.get(token[0]).pointY();
       int endX = objects.get(token[1]).pointX();
