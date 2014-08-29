@@ -27,14 +27,6 @@ class Object {
     int[] token = int(splitTokens(data));
     return token[pdatas];
   }
-  int pointX() {
-    int[] token = int(splitTokens(data));
-    return token[0];
-  }
-  int pointY() {
-    int[] token = int(splitTokens(data));
-    return token[1];
-  }
   void chkSwit(int sw) {
     chk = sw;
   }
