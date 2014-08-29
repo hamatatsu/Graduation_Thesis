@@ -23,6 +23,10 @@ class Object {
   int chk() {
     return chk;
   }
+  int datas(int pdatas) {
+    int[] token = int(splitTokens(data));
+    return token[pdatas];
+  }
   int pointX() {
     int[] token = int(splitTokens(data));
     return token[0];
@@ -35,11 +39,8 @@ class Object {
     chk = sw;
   }
   void d_add(int px, int py) {
-    switch(type) {
-    case 0:
-      data = str(px) + " " + str(py);
-      break;
-    }
+    data = str(px) + " " + str(py);
     chk = 0;
   }
 }
+
