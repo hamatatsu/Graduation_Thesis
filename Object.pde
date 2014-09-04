@@ -27,7 +27,7 @@ class Object {
     int[] token = int(splitTokens(data));
     return token[pdatas];
   }
-  void chkSwit(int sw) {
+  void checkSwitch(int sw) {
     chk = sw;
   }
   void d_add(int px, int py) {

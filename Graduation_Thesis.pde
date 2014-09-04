@@ -58,7 +58,7 @@ void draw() {
       objects.add(count + 1, newObject);
       count++;
       for (i = 1; i < objects.size (); i++) {
-        objects.get(i).chkSwit(0);
+        objects.get(i).checkSwitch(0);
       }
     } else {
       for (i = 1; i < objects.size (); i++) {
@@ -130,7 +130,7 @@ int search(int px, int py) {
       switch(objects.get(i).type()) {
       case 0:
         if (dist(float(px), float(py), token[0], token[1]) <= 5) {
-          objects.get(i).chkSwit(1);
+          objects.get(i).checkSwitch(1);
           tchk = false;
           i2 = i;
           i = objects.size();
