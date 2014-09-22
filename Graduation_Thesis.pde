@@ -1,4 +1,4 @@
-ArrayList<Object> objects = new ArrayList<Object>();
+ArrayList<GeomObject> objects = new ArrayList<GeomObject>();
 int count = 1;
 int tx;
 int ty;
@@ -8,7 +8,7 @@ int i;
 int i2;
 int pkeyn;  
 String datas;
-Object newObject;
+GeomObject newObject;
 
 String[] objectNameString = {
   "point", "segment", "circle"
@@ -24,7 +24,7 @@ void setup() {
   fill(0, 0);
   strokeWeight(5);
   ellipseMode(CENTER);
-  Object newObject = new Object(0, 0, "-1 -1", 0);
+  GeomObject newObject = new GeomObject(0, 0, "-1 -1", 0);
   objects.add(0, newObject);
 }
 
@@ -40,16 +40,16 @@ void draw() {
     if (keyPressed && (objects.get(0).data() != "-1 -1")) {
       switch(objects.get(0).type()) {
       case 0:
-        newObject = new Object(count, objects.get(0).type(), objects.get(0).data(), 0);
+        newObject = new GeomObject(count, objects.get(0).type(), objects.get(0).data(), 0);
         break;
       case 1:
         tchk = true;
-        newObject = new Object(count, objects.get(0).type(), search(objects.get(0).datas(0), objects.get(0).datas(1)) + " " + objects.get(0).datas(2), 0);
+        newObject = new GeomObject(count, objects.get(0).type(), search(objects.get(0).datas(0), objects.get(0).datas(1)) + " " + objects.get(0).datas(2), 0);
         tchk = true;
         break;
       case 2:
         tchk = true;
-        newObject = new Object(count, objects.get(0).type(), search(objects.get(0).datas(0), objects.get(0).datas(1)) + " " + objects.get(0).datas(2), 0);
+        newObject = new GeomObject(count, objects.get(0).type(), search(objects.get(0).datas(0), objects.get(0).datas(1)) + " " + objects.get(0).datas(2), 0);
         tchk = true;
         break;
       }
@@ -67,12 +67,12 @@ void draw() {
         if (objects.get(i).type() != 0) {
           datas = objects.get(i).data();
           datas = datas.replaceAll("0", str(i2));
-          objects.set(i, new Object(i, objects.get(i).type(), datas, 0));
+          objects.set(i, new GeomObject(i, objects.get(i).type(), datas, 0));
         }
       }
       i2 = 0;
     }
-    Object newObject = new Object(0, 0, "-1 -1", 0);
+    GeomObject newObject = new GeomObject(0, 0, "-1 -1", 0);
     objects.set(0, newObject);
   }
   if (objects.size() > 0) {
@@ -107,7 +107,7 @@ void mousePushed() {
         break;
       }
       if (chk) {
-        objects.set(0, new Object(0, pkeyn, datas, 0));
+        objects.set(0, new GeomObject(0, pkeyn, datas, 0));
       }
     }
     chk = false;
@@ -117,7 +117,7 @@ void mousePushed() {
       if (objects.get(i).type() != 0) {
         datas = objects.get(i).data();
         datas = datas.replaceAll(str(i2), "0");
-        objects.set(i, new Object(i, objects.get(i).type(), datas, 0));
+        objects.set(i, new GeomObject(i, objects.get(i).type(), datas, 0));
       }
     }
   }

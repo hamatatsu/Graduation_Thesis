@@ -1,9 +1,9 @@
-class Object {
+class GeomObject {
   int name;
   int type;
   String data;
   int chk;
-  Object (int pname, int ptype, String pdata, int pchk) {
+  GeomObject (int pname, int ptype, String pdata, int pchk) {
     name = pname;
     type = ptype;
     data = pdata;
