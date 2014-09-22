@@ -1,7 +1,5 @@
-// Tatsuya Hamada's graduation thesis.
-
 ArrayList<Object> objects = new ArrayList<Object>();
-int count = 0;
+int count = 1;
 int tx;
 int ty;
 boolean tchk = true;
@@ -13,7 +11,7 @@ String datas;
 Object newObject;
 
 String[] objectNameString = {
-  "point", "segmenta", "circle"
+  "point", "segment", "circle"
 };
 char[] objectName = {
   'a', 's', 'd'
@@ -31,8 +29,8 @@ void setup() {
 }
 
 void draw() {
-
   background(255);
+  i = 0;
   tx = mouseX;
   ty = mouseY;
   if (mousePressed) {
@@ -42,20 +40,20 @@ void draw() {
     if (keyPressed && (objects.get(0).data() != "-1 -1")) {
       switch(objects.get(0).type()) {
       case 0:
-        newObject = new Object(count + 1, objects.get(0).type(), objects.get(0).data(), 0);
+        newObject = new Object(count, objects.get(0).type(), objects.get(0).data(), 0);
         break;
       case 1:
         tchk = true;
-        newObject = new Object(count + 1, objects.get(0).type(), search(objects.get(0).datas(0), objects.get(0).datas(1)) + " " + objects.get(0).datas(2), 0);
+        newObject = new Object(count, objects.get(0).type(), search(objects.get(0).datas(0), objects.get(0).datas(1)) + " " + objects.get(0).datas(2), 0);
         tchk = true;
         break;
       case 2:
         tchk = true;
-        newObject = new Object(count + 1, objects.get(0).type(), search(objects.get(0).datas(0), objects.get(0).datas(1)) + " " + objects.get(0).datas(2), 0);
+        newObject = new Object(count, objects.get(0).type(), search(objects.get(0).datas(0), objects.get(0).datas(1)) + " " + objects.get(0).datas(2), 0);
         tchk = true;
         break;
       }
-      objects.add(count + 1, newObject);
+      objects.add(count, newObject);
       count++;
       for (i = 1; i < objects.size (); i++) {
         objects.get(i).checkSwitch(0);
@@ -72,6 +70,7 @@ void draw() {
           objects.set(i, new Object(i, objects.get(i).type(), datas, 0));
         }
       }
+      i2 = 0;
     }
     Object newObject = new Object(0, 0, "-1 -1", 0);
     objects.set(0, newObject);
@@ -144,6 +143,11 @@ int search(int px, int py) {
 void display() {
   for (i = 0; i < objects.size (); i++) {
     int[] token = int(splitTokens(objects.get(i).data()));
+    if (objects.get(i).chk() == 1) {
+      stroke(255);
+    } else {
+      stroke(0);
+    }
     switch(objects.get(i).type()) {
     case 0:
       strokeWeight(5);
@@ -155,14 +159,6 @@ void display() {
         int endX = objects.get(token[2]).datas(0);
         int endY = objects.get(token[2]).datas(1);
         line(token[0], token[1], endX, endY);
-        //      token[0]--;
-        //      int startX = objects.get(token[0]).pointX();
-        //      int startY = objects.get(token[0]).pointY();
-        //      int endX = objects.get(token[1]).pointX();
-        //      int endY = objects.get(token[1]).pointY();
-        //      float a = (startY - endY) / (startX - endX);
-        //      float b = startY - startX * a;
-        //      line(-500, -500 * a + b, 500, 500 * a + b);
       } else {
         int startX = objects.get(token[0]).datas(0);
         int startY = objects.get(token[0]).datas(1);
@@ -178,14 +174,6 @@ void display() {
         int centerY = objects.get(token[2]).datas(1);
         float r = dist(centerX, centerY, token[0], token[1]) * 2;
         ellipse(centerX, centerY, r, r);
-        //      token[0]--;
-        //      int startX = objects.get(token[0]).pointX();
-        //      int startY = objects.get(token[0]).pointY();
-        //      int endX = objects.get(token[1]).pointX();
-        //      int endY = objects.get(token[1]).pointY();
-        //      float a = (startY - endY) / (startX - endX);
-        //      float b = startY - startX * a;
-        //      line(-500, -500 * a + b, 500, 500 * a + b);
       } else {
         int edgeX = objects.get(token[0]).datas(0);
         int edgeY = objects.get(token[0]).datas(1);

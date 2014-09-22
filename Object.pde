@@ -1,5 +1,3 @@
-// Tatsuya Hamada's graduation thesis.
-
 class Object {
   int name;
   int type;
