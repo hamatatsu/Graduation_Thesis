@@ -45,14 +45,13 @@ void draw() {
       case 1:
         tchk = true;
         newObject = new GeomObject(count, objects.get(0).type(), search(objects.get(0).datas(0), objects.get(0).datas(1)) + " " + objects.get(0).datas(2), 0);
-        tchk = true;
         break;
       case 2:
         tchk = true;
         newObject = new GeomObject(count, objects.get(0).type(), search(objects.get(0).datas(0), objects.get(0).datas(1)) + " " + objects.get(0).datas(2), 0);
-        tchk = true;
         break;
       }
+      tchk = true;
       objects.add(count, newObject);
       count++;
       for (i = 1; i < objects.size (); i++) {
